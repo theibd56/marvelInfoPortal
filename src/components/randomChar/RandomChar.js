@@ -9,7 +9,6 @@ import mjolnir from '../../resources/img/mjolnir.png';
 class RandomChar extends Component {
     constructor(props) {
         super(props);
-        this.updateChar();
     }
 
     state = {
@@ -36,6 +35,10 @@ class RandomChar extends Component {
             .catch(this.onError)
     }
 
+    componentDidMount() {
+        this.updateChar();
+    }
+
     render() {
         const {char, loading, error} = this.state;
         const errorMessage = error ? <ErrorMessage/> : null;
@@ -55,7 +58,7 @@ class RandomChar extends Component {
                     <p className="randomchar__title">
                         Or choose another one
                     </p>
-                    <button className="button button__main">
+                    <button className="button button__main" onClick={this.updateChar}>
                         <div className="inner">try it</div>
                     </button>
                     <img src={mjolnir} alt="mjolnir" className="randomchar__decoration"/>
