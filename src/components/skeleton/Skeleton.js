@@ -12,6 +12,15 @@ const Skeleton = () => {
                 <div className="pulse skeleton__block"></div>
                 <div className="pulse skeleton__block"></div>
                 <div className="pulse skeleton__block"></div>
+                <div className="pulse skeleton__block"></div>
+                <div className="pulse skeleton__block"></div>
+                <div className="pulse skeleton__block"></div>
+                <div className="pulse skeleton__block"></div>
+                <div className="pulse skeleton__block"></div>
+                <div className="pulse skeleton__block"></div>
+                <div className="pulse skeleton__block"></div>
+                <div className="pulse skeleton__block"></div>
+                <div className="pulse skeleton__block"></div>
             </div>
         </>
     )
