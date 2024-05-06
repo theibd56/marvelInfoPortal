@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import PropTypes from 'prop-types'
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
@@ -40,11 +41,11 @@ class CharList extends Component {
             ended = true;
         }
 
-        this.setState(({offset, charList}) => ({
-            charList: [...charList, ...newCharList],
+        this.setState(({offset}) => ({
+            charList: [...newCharList],
             loading: false,
             newItemLoading: false,
-            offset: offset + 3,
+            offset: offset + 9,
             charEnded: ended
         }))
     }
@@ -101,11 +102,15 @@ class CharList extends Component {
                     disabled={newItemLoading}
                     style={{'display': charEnded ? 'none' : 'block'}}
                     onClick={() => this.onRequest(offset)}>
-                    <div className="inner">load more</div>
+                    <div className="inner">Random characters</div>
                 </button>
             </div>
         )
     }
+}
+
+CharList.propTypes = {
+    onCharSelected: PropTypes.func
 }
 
 export default CharList;

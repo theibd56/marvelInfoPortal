@@ -3,6 +3,7 @@ class MarvelService {
     _apiBase = 'https://gateway.marvel.com:443/v1/public/';
     _apiKey = 'apikey=e251c56562ab3f7896538d11f46d6633';
     _baseOffset = 250;
+    _baseLimit = 9;
 
 
     getResource = async (url) => {
@@ -16,7 +17,7 @@ class MarvelService {
     }
 
     getAllCharacters = async (offset = this._baseOffset) => {
-        const res = await this.getResource(`${this._apiBase}characters?limit=3&offset=${offset}&${this._apiKey}`);        
+        const res = await this.getResource(`${this._apiBase}characters?limit=${this._baseLimit}&offset=${offset}&${this._apiKey}`);        
         return res.data.results.map(this._transformCharacter);
     }
 
@@ -28,7 +29,7 @@ class MarvelService {
     _transformCharacter = (char) => {
         return {
             id: char.id,
-            name: char.name,
+            name: char.name ? `${char.name.slice(0, 50)}` : 'Noname',
             description: char.description ? `${char.description.slice(0, 200)}...` : 'There is no description for this character, at the request of the FBI representatives',
             thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension, 
             homepage: char.urls[0].url,
