@@ -57,8 +57,20 @@ class CharList extends Component {
         })
     }
 
+    charRefs = [];
+
+    setRef = (ref) => {
+        this.charRefs.push(ref);
+    }
+
+    focusOnChar = (id) => {
+        this.charRefs.forEach(char => char.classList.remove('char__item_selected'));
+        this.charRefs[id].classList.add('char__item_selected');
+        this.charRefs[id].focus();
+    }
+
     renderItems(arr) {
-        const items =  arr.map((item) => {
+        const items =  arr.map((item, i) => {
             let imgStyle = {'objectFit' : 'cover'};
             if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                 imgStyle = {'objectFit' : 'unset'};
@@ -67,8 +79,19 @@ class CharList extends Component {
             return (
                 <li 
                     className="char__item"
+                    tabIndex={0}
+                    ref={this.setRef}
                     key={item.id}
-                    onClick={() => this.props.onCharSelected(item.id)}>
+                    onClick={() => {
+                        this.props.onCharSelected(item.id);
+                        this.focusOnChar(i);
+                    }}
+                    KeyPress={(e) => {
+                        if (e.key === ' ' || e.key === "Enter") {
+                            this.props.onCharSelected(item.id);
+                            this.focusOnChar(i);
+                        }
+                    }}>
                         <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
                         <div className="char__name">{item.name}</div>
                 </li>
@@ -110,7 +133,7 @@ class CharList extends Component {
 }
 
 CharList.propTypes = {
-    onCharSelected: PropTypes.func
+    onCharSelected: PropTypes.func.isRequired
 }
 
 export default CharList;
