@@ -12,7 +12,7 @@ const SingleComics = ({data}) => {
             <Helmet>
                 <meta
                     name="description"
-                    content={`${title} comics book`}
+                    content={`${title} comics`}
                 />
                 <title>{title}</title>
             </Helmet>
